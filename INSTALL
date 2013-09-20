@@ -1,0 +1,14 @@
+CB7 Thumbnail Plugin for KDE 4 v0.1 and 7zl v1.0.1
+
+INSTALLATION
+============
+
+  To install this cb7 thumbnailer plugin and 7zl, unpack the archive, go to the 
+  directory where this INSTALL file is and execute the commands:
+
+  mkdir build
+  cd build
+  cmake -DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` ../
+  make
+  sudo make install
+  kbuildsycoca4

@@ -1,0 +1,56 @@
+A cb7 thumbnail plugin for the K Desktop Environment (KDE 4).
+Licensed under GPL, v3.
+
+  Uses the KDE4's KIO::ThumbCreator class to add a service
+  that provides previews for cb7 files (.cb7).
+
+  See INSTALL for information on installing the plugin.
+
+USAGE
+=====
+
+  To see it in action, open Dolphin and set the previews to on. Or hover
+  over a .cb7 file to see the preview in the Information panel.
+
+  If you want to turn on/off the previews for comic books, go to
+  "Dolphin > Settings > Configure Dolphin... > General > Previews"
+  and check/uncheck the "Comic Books (cb7)" plugin in it.
+
+NOTES
+=====
+  * In some cases, you have to increase the Maximum File Size
+    limit (~40 MB) in the configuration dialog to make certain previews work.
+  * 7zl is part of program. 7zl must be installed in system - 
+    without this, library will be not work
+
+cb7thumbnails License
+====================
+
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Lesser General Public
+  License as published by the Free Software Foundation; either
+  version 3 of the License, or (at your option) any later version.
+
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU Lesser General Public
+  License along with this library.  If not, see <http://www.gnu.org/licenses/>.
+
+7zl License
+===========
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
