@@ -1,6 +1,6 @@
 /**
  *
- * cb7 Comic Book Thumbnailer for KDE 4 v0.1
+ * cb7 Comic Book Thumbnailer for KDE 4 v0.2
  * Creates cover page previews for cb7 comic-book files.
  * 
  * This program is distributed in the hope that it will be useful,
@@ -46,9 +46,9 @@ class Cb7Creator : public QObject, public ThumbCreator
         // For 7z type files.
         	
         bool extract7zImage( QString path );
-        bool is7zlAvailable( QString &uzPath );
+        
 	bool is7zAvailable( QString &uzlPath );
-        void get7zFileList( QStringList &entries, const QString path, const QString uzlPath, const QString uzPath );
+        void get7zFileList( QStringList &entries, const QString path, const QString uzPath );
         
     private Q_SLOTS:
         void readProcessOut();
