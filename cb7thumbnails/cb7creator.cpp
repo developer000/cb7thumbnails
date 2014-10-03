@@ -103,24 +103,16 @@ bool Cb7Creator::extract7zImage( QString path )
 {
     /// Extracts the cover image out of the .cb7 file.
     QString uzPath;
-    QString uzlPath;
-    bool available = Cb7Creator::is7zAvailable( uzPath );
-    bool available2 = Cb7Creator::is7zlAvailable( uzlPath );
-    
+    bool available = is7zAvailable(uzPath);
     // Check if 7z is available. Get its path in 'uzPath'.
     if( !available ) {
         kDebug( KIO_THUMB )<<"A suitable version of 7z is not available. Exiting.";
         return false;
     } 
-    // Check if 7zl is available. Get its path in 'uzlPath'.
-    if( !available2 ) {
-        kDebug( KIO_THUMB )<<"A suitable version of 7zl is not available. Exiting.";
-        return false;
-    }
     QStringList entries;
 
     // Get the files and filter the images out.
-    Cb7Creator::get7zFileList( entries, path, uzlPath, uzPath );
+    Cb7Creator::get7zFileList( entries, path, uzPath );
     Cb7Creator::filterImages( entries, true );
 
     // Clear previously used data arrays.
@@ -154,10 +146,17 @@ bool Cb7Creator::extract7zImage( QString path )
 }
 
 
-void Cb7Creator::get7zFileList( QStringList &entries, const QString path, const QString uzlPath, const QString uzPath )
+void Cb7Creator::get7zFileList( QStringList &entries, const QString path, const QString uzPath )
 {
-    Cb7Creator::startProcess( uzlPath, QStringList() << uzPath << path );  
-    entries = QString::fromLocal8Bit( m_stdOut ).split( '\n', QString::SkipEmptyParts );
+    Cb7Creator::startProcess( uzPath, QStringList() << "l" << path << "-slt" );  
+    QStringList entries_mem = QString::fromLocal8Bit( m_stdOut ).split( '\n', QString::SkipEmptyParts );
+    for(QStringList::iterator i= entries_mem.begin();i!= entries_mem.end(); ++i)
+      if(i->startsWith("Path = ",Qt::CaseSensitive)){
+	QString mem=*i;
+	mem.remove(0,7);
+	entries.append(mem);
+      }
+    entries.removeFirst(); //Remove archive file from entries
 }
 
 bool Cb7Creator::is7zAvailable( QString &uzPath )
@@ -181,23 +180,6 @@ bool Cb7Creator::is7zAvailable( QString &uzPath )
       }
     }
       return false;
-}
-
-bool Cb7Creator::is7zlAvailable( QString &uzlPath )
-{
-    /// Check the standard paths to see if a suitable 7zl is available.
-    uzlPath = KStandardDirs::findExe( "7zl" );
-    if( !uzlPath.isEmpty() ) {
-      QProcess proc;
-      proc.start( uzlPath, QStringList() << "-h" );
-      proc.waitForFinished( -1 );
-      const QStringList lines = QString::fromLocal8Bit( proc.readAllStandardOutput() ).split\
-      ( '\n', QString::SkipEmptyParts );
-      if ( lines.first().contains( "7zl" ) ) {
-      return true;
-      }
-    }
-    return false;
 }
 
 void Cb7Creator::readProcessOut()
